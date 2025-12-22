@@ -22,16 +22,40 @@ inline auto ComputeDistance(const std::vector<double> &left, const std::vector<d
   BUSTUB_ASSERT(sz == right.size(), "vector length mismatched!");
   switch (dist_fn) {
     case VectorExpressionType::L2Dist: {
-      // IMPLEMENT ME
-      return 0.0;
+      // 欧式距离
+      double sum = 0.0;
+      for (size_t i = 0; i < sz; i++) {
+        double diff = left[i] - right[i];
+        sum += diff * diff;
+      }
+      return std::sqrt(sum);
     }
     case VectorExpressionType::InnerProduct: {
-      // IMPLEMENT ME
-      return 1.0;
+      // 内积
+      double sum = 0.0;
+      for (size_t i = 0; i < sz; i++) {
+        sum += left[i] * right[i];  
+      }
+      return sum;
     }
     case VectorExpressionType::CosineSimilarity: {
-      // IMPLEMENT ME
-      return 2.0;
+      // 余弦距离
+      double dot_product = 0.0;
+      for (size_t i = 0; i < sz; ++i) {
+          dot_product += left[i] * right[i];
+      }
+
+      double norm_a = 0.0;
+      double norm_b = 0.0;
+      for (size_t i = 0; i < sz; ++i) {
+          norm_a += left[i] * left[i];
+          norm_b += right[i] * right[i];
+      }
+      norm_a = std::sqrt(norm_a);
+      norm_b = std::sqrt(norm_b);
+
+      double similarity = dot_product / (norm_a * norm_b);
+      return similarity;
     }
     default:
       BUSTUB_ASSERT(false, "Unsupported vector expr type.");

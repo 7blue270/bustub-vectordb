@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -56,12 +57,25 @@ class TopNExecutor : public AbstractExecutor {
   }
 
   /** @return The size of top_entries_ container, which will be called on each child_executor->Next(). */
-  auto GetNumInHeap() -> size_t;
+  //auto GetNumInHeap() -> size_t;
 
+  //定义一个结构体来存放堆中的元素结果
+  struct SearchResult{
+      Tuple tuple_;
+      double distance_;
+      bool operator<(const SearchResult &other) const {
+          return distance_ < other.distance_;  //最大堆
+      }
+  };
  private:
   /** The TopN plan node to be executed */
   const TopNPlanNode *plan_;
   /** The child executor from which tuples are obtained */
   std::unique_ptr<AbstractExecutor> child_executor_;
+  size_t current_index_ = 0;
+  //定义一个最大堆
+  std::priority_queue<SearchResult> top_entries_;
+  //用于存储最终排好序的结果
+  std::vector<Tuple> output_tuples_;
 };
 }  // namespace bustub

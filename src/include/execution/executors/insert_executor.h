@@ -69,7 +69,7 @@ class InsertExecutor : public AbstractExecutor {
   [[maybe_unused]] TableHeap *table_heap_;
 
   // Whether `Next` has been called.
-  [[maybe_unused]] bool emitted_{false};
+  bool emitted_{false};
 };
 
 }  // namespace bustub

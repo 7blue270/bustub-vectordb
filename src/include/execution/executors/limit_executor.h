@@ -54,5 +54,8 @@ class LimitExecutor : public AbstractExecutor {
 
   /** The child executor from which tuples are obtained */
   std::unique_ptr<AbstractExecutor> child_executor_;
+  //存储已经输出的元组们tuples_,标志迭代器iter_
+  std::vector<Tuple> tuples_;
+  std::vector<Tuple>::iterator iter_;    //使用在next()中
 };
 }  // namespace bustub
