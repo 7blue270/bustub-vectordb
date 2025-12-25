@@ -57,7 +57,7 @@ class TopNExecutor : public AbstractExecutor {
   }
 
   /** @return The size of top_entries_ container, which will be called on each child_executor->Next(). */
-  //auto GetNumInHeap() -> size_t;
+  auto GetNumInHeap() -> size_t;
 
   //定义一个结构体来存放堆中的元素结果
   struct SearchResult{

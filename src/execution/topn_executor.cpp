@@ -57,8 +57,8 @@ auto TopNExecutor::Next(Tuple *tuple, RID *rid) -> bool {
 //【思想】：这里有些类似于外部归并排序的思想。最开始是想着init()得到一个n大小的堆，在next()中一次性直接弹出n个元素返回，但这样违反了迭代器模型，且数据无法持久化。
 //所以这里需要将排序和转换的逻辑放在Init中，next中就只需要把最终结果vector一个一个弹出来
 
-// auto TopNExecutor::GetNumInHeap() -> size_t {   //返回当前堆top_entries_的大小
-//     return 0;
-// };
+auto TopNExecutor::GetNumInHeap() -> size_t {   //返回当前堆top_entries_的大小
+    return output_tuples_.size();
+};
 
 }  // namespace bustub
