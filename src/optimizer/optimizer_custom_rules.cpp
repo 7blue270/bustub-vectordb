@@ -8,13 +8,15 @@
 namespace bustub {
 
 auto Optimizer::OptimizeCustom(const AbstractPlanNodeRef &plan) -> AbstractPlanNodeRef {
+  //需要修改这里使得优化器的顺序符合要求
   auto p = plan;
   p = OptimizeMergeProjection(p);
   p = OptimizeMergeFilterNLJ(p);
   p = OptimizeNLJAsHashJoin(p);
-  p = OptimizeAsVectorIndexScan(p);
+  //p = OptimizeAsVectorIndexScan(p);
   p = OptimizeOrderByAsIndexScan(p);
   p = OptimizeSortLimitAsTopN(p);
+  p = OptimizeAsVectorIndexScan(p); //将向量索引优化放在SortLimitAsTopN之后
   p = OptimizeMergeFilterScan(p);
   p = OptimizeSeqScanAsIndexScan(p);
   return p;
