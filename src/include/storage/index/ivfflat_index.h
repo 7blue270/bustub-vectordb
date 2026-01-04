@@ -23,16 +23,20 @@ class IVFFlatIndex : public VectorIndex {
 
   BufferPoolManager *bpm_;
   // number of buckets or lists to create when building the index
-  size_t lists_{0};
+  //构建索引时要创建的存储桶或列表的数量
+  size_t lists_{0}; 
   // number of buckets or lists to probe when lookup
+  //查找时要探测的存储桶或列表的数量
   size_t probe_lists_{0};
 
   using Vector = std::vector<double>;
 
   // vector of each centroid
+  //每个质心的向量  
   std::vector<Vector> centroids_;
 
   // vectors and RIDs in each of the centroid list
+  //每个质心列表中的向量和RID
   std::vector<std::vector<std::pair<Vector, RID>>> centroids_buckets_;
 };
 

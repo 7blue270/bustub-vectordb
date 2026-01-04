@@ -282,6 +282,8 @@ class BustubInstance {
   // Currently the followings are directly referenced by recovery test, so
   // we cannot do anything on them until someone decides to refactor the recovery test.
 
+  void ShutDown();  //持久化操作的函数
+
   std::unique_ptr<DiskManager> disk_manager_;
   std::unique_ptr<BufferPoolManager> buffer_pool_manager_;
 

@@ -469,4 +469,10 @@ void BustubInstance::CmdTxn(const std::vector<std::string> &params, ResultWriter
   writer.OneCell("unsupported txn cmd.");
 }
 
+// void BustubInstance::ShutDown() {
+//   if (PERSIST_DB) {
+//     txn_manager_->Persist(true);
+//   }
+// }
+
 }  // namespace bustub
